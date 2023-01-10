@@ -26,6 +26,11 @@ export function ProtectedRoute ({ children }) {
   return children;
 };
 
+export function editUser(id, user) {
+  console.log(user);
+  return id;
+}
+
 export function fakeAuth() {
   return new Promise((resolve) => {
     setTimeout(() => resolve('2342f2f1d131rf12'), 250);
@@ -49,10 +54,16 @@ export function AuthProvider({ children }) {
     setToken(null);
   };
 
+  const handleEdit = (id, user) => {
+    const res = editUser(id, user);
+    console.log(res);
+  }
+
   const value = {
     token,
     onLogin: handleLogin,
     onLogout: handleLogout,
+    onEdit: handleEdit,
   };
 
   return (

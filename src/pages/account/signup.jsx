@@ -14,17 +14,21 @@ import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { Copyright } from '../../components/copyright';
 import { Link as RouterLink } from "react-router-dom";
+import { useAuth } from '../../components/auth';
 
 const theme = createTheme();
 
 export default function SignUp() {
+  const { onEdit } = useAuth();
+
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    console.log({
+    const user = {
       email: data.get('email'),
       password: data.get('password'),
-    });
+    };
+    onEdit(null, user);
   };
 
   return (
