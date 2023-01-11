@@ -1,9 +1,9 @@
-import { 
+import {
   useState,
-  createContext, 
-  useContext, 
+  createContext,
+  useContext,
 } from 'react'
-import { 
+import {
   Navigate,
   useLocation,
   useNavigate,
@@ -15,7 +15,7 @@ export function useAuth() {
   return useContext(AuthContext);
 };
 
-export function ProtectedRoute ({ children }) {
+export function ProtectedRoute({ children }) {
   const { token } = useAuth();
   const location = useLocation();
 
@@ -26,15 +26,32 @@ export function ProtectedRoute ({ children }) {
   return children;
 };
 
-export function editUser(id, user) {
+export async function editUser(id, user) {
   console.log(user);
-  return id;
+  let res = await fetch("http://stock.local.tst/ci/index.php/api/v1/users/edit", {
+    method: "POST",
+    headers:{"Content-Type": "application/json"},
+    body: JSON.stringify(user),
+  });
+  return res;
 }
 
-export function fakeAuth() {
-  return new Promise((resolve) => {
-    setTimeout(() => resolve('2342f2f1d131rf12'), 250);
+export async function fakeAuth(user) {
+  //return new Promise((resolve) => {
+  //  setTimeout(() => resolve('2342f2f1d131rf12'), 250);
+  //});
+  console.log(user);
+  let res = await fetch("http://stock.local.tst/ci/index.php/api/v1/users/authenticate", {
+    method: "POST",
+    headers:{"Content-Type": "application/json"},
+    body: JSON.stringify(user),
+  })
+  .then(response => response.json())
+  .then(console.log)
+  .catch((err) => {
+    console.log(err.message)
   });
+  return res;
 }
 
 export function AuthProvider({ children }) {
@@ -43,7 +60,7 @@ export function AuthProvider({ children }) {
   const [token, setToken] = useState(null);
 
   const handleLogin = async (user) => {
-    const token = await fakeAuth();
+    const token = await fakeAuth(user);
     console.log(user);
     setToken(token);
     const origin = location.state?.from?.pathname || '/home';

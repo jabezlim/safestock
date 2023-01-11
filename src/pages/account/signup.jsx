@@ -27,6 +27,8 @@ export default function SignUp() {
     const user = {
       email: data.get('email'),
       password: data.get('password'),
+      firstname : data.get('firstName'),
+      lastname : data.get('lastName'),
     };
     onEdit(null, user);
   };
