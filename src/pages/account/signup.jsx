@@ -13,13 +13,14 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { Copyright } from '../../components/copyright';
-import { Link as RouterLink } from "react-router-dom";
-import { useAuth } from '../../components/auth';
+import { useNavigate, Link as RouterLink } from "react-router-dom";
+import { base_url } from '../../config/path';
+import axios from 'axios';
 
 const theme = createTheme();
 
 export default function SignUp() {
-  const { onEdit } = useAuth();
+  const navigate = useNavigate();
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -27,10 +28,24 @@ export default function SignUp() {
     const user = {
       email: data.get('email'),
       password: data.get('password'),
-      firstname : data.get('firstName'),
-      lastname : data.get('lastName'),
+      firstname: data.get('firstName'),
+      lastname: data.get('lastName'),
+      optin: data.get('optIn') == 'on',
     };
-    onEdit(null, user);
+    //onEdit(null, user);
+    
+    console.log(user);
+    const url = base_url + "users/edit";
+    axios.post(url, user)
+      .then(res => {
+        console.log(res);
+        if (res.data) {
+          navigate('/login');
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   return (
@@ -97,7 +112,7 @@ export default function SignUp() {
               </Grid>
               <Grid item xs={12}>
                 <FormControlLabel
-                  control={<Checkbox value="allowExtraEmails" color="primary" />}
+                  control={<Checkbox id="optIn" name="optIn" color="primary" />}
                   label="I want to receive inspiration, marketing promotions and updates via email."
                 />
               </Grid>

@@ -16,71 +16,43 @@ export function useAuth() {
 };
 
 export function ProtectedRoute({ children }) {
-  const { token } = useAuth();
+  const { user } = useAuth();
   const location = useLocation();
 
-  if (!token) {
+  if (!user) {
     return <Navigate to="/home" replace state={{ from: location }} />;
   }
 
   return children;
 };
 
-export async function editUser(id, user) {
-  console.log(user);
-  let res = await fetch("http://stock.local.tst/ci/index.php/api/v1/users/edit", {
-    method: "POST",
-    headers:{"Content-Type": "application/json"},
-    body: JSON.stringify(user),
-  });
-  return res;
-}
-
 export async function fakeAuth(user) {
-  //return new Promise((resolve) => {
-  //  setTimeout(() => resolve('2342f2f1d131rf12'), 250);
-  //});
-  console.log(user);
-  let res = await fetch("http://stock.local.tst/ci/index.php/api/v1/users/authenticate", {
-    method: "POST",
-    headers:{"Content-Type": "application/json"},
-    body: JSON.stringify(user),
-  })
-  .then(response => response.json())
-  .then(console.log)
-  .catch((err) => {
-    console.log(err.message)
+  return new Promise((resolve) => {
+   setTimeout(() => resolve('2342f2f1d131rf12'), 250);
   });
-  return res;
 }
 
 export function AuthProvider({ children }) {
   const navigate = useNavigate();
   const location = useLocation();
-  const [token, setToken] = useState(null);
+  const [user, setUser] = useState(null);
 
-  const handleLogin = async (user) => {
-    const token = await fakeAuth(user);
-    console.log(user);
-    setToken(token);
-    const origin = location.state?.from?.pathname || '/home';
-    navigate(origin);
+  const handleLogin = async (data) => {    
+    if (data.token) {
+      setUser(data);
+      const origin = location.state?.from?.pathname || '/home';
+      navigate(origin);
+    }
   };
 
   const handleLogout = () => {
-    setToken(null);
+    setUser(null);
   };
 
-  const handleEdit = (id, user) => {
-    const res = editUser(id, user);
-    console.log(res);
-  }
-
   const value = {
-    token,
+    user,
     onLogin: handleLogin,
     onLogout: handleLogout,
-    onEdit: handleEdit,
   };
 
   return (

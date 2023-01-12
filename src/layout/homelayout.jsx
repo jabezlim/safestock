@@ -11,7 +11,7 @@ import { useAuth } from '../components/auth';
 import { Footer } from './footer';
 
 export function HomeLayout() {
-  const { token, onLogin, onLogout } = useAuth();
+  const { user, onLogin, onLogout } = useAuth();
   return (
     <>
       <GlobalStyles styles={{ ul: { margin: 0, padding: 0, listStyle: 'none' } }} />
@@ -35,31 +35,31 @@ export function HomeLayout() {
               variant="button"
               color="text.primary"
               component={RouterLink}
-              to="feature"
+              to="/dashboard"
               sx={{ my: 1, mx: 1.5 }}
             >
-              Features
+              Dashboard
             </Link>
             <Link
               variant="button"
               color="text.primary"
               component={RouterLink}
-              to="enterprise"
+              to="/admin"
               sx={{ my: 1, mx: 1.5 }}
             >
-              Enterprise
+              Admin
             </Link>
             <Link
               variant="button"
               color="text.primary"
               component={RouterLink}
-              to="support"
+              to="/home"
               sx={{ my: 1, mx: 1.5 }}
             >
-              Support
+              PRICE
             </Link>
           </nav>
-          {token ? (
+          {user ? (
             <Button variant="outlined" sx={{ my: 1, mx: 1.5 }} onClick={onLogout}>
               Logout
             </Button>

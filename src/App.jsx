@@ -21,6 +21,7 @@ function App() {
     <AuthProvider>
       <Routes>
         <Route path="/" element={<HomeLayout />}>
+          <Route index element={<Home />} />
           <Route path="home" element={<Home />} />
           <Route path="feature" element={<Feature />} />
           <Route path="enterprise" element={<Enterprise />} />
@@ -28,11 +29,12 @@ function App() {
         </Route>
         <Route path="login" element={<Login />} />
         <Route path="signup" element={<SignUp />} />
-        <Route path="dashboard" element={
-          <ProtectedRoute>
-            <Dashboard />
-          </ProtectedRoute>
-        } />
+        <Route path="/dashboard" element={<Dashboard />} />
+        {/* <Route path="/dashboard" element={<DashLayout />}>
+          <Route index element={<Dashboard />
+            //<ProtectedRoute><Dashboard /></ProtectedRoute>
+          }/>
+        </Route> */}
         <Route
           path="admin"
           element={

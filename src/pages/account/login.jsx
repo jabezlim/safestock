@@ -15,6 +15,8 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { Copyright } from '../../components/copyright';
 import { Link as RouterLink } from "react-router-dom";
 import { useAuth } from '../../components/auth';
+import axios from 'axios';
+import { base_url } from '../../config/path';
 
 const theme = createTheme();
 
@@ -27,7 +29,16 @@ export default function Login() {
       email: data.get('email'),
       password: data.get('password'),
     };
-    onLogin(user);
+    axios.post( base_url+"users/authenticate", user)
+      .then(res => {
+        console.log(res);
+        if (res.data) {
+          onLogin(res.data);         
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   return (
