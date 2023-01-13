@@ -30,9 +30,9 @@ export default function Login() {
       password: data.get('password'),
     };
     axios.post( base_url+"users/authenticate", user)
-      .then(res => {
-        console.log(res);
+      .then(res => {        
         if (res.data) {
+          console.log(res.data);
           onLogin(res.data);         
         }
       })

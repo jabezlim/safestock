@@ -15,6 +15,7 @@ import { HomeLayout } from './layout/homelayout';
 import { Enterprise, Feature, Support } from './pages/public/feature';
 import Login from './pages/account/login';
 import SignUp from './pages/account/signup';
+import { DashLayout } from './layout/dashlayout';
 
 function App() {
   return (
@@ -27,14 +28,15 @@ function App() {
           <Route path="enterprise" element={<Enterprise />} />
           <Route path="support" element={<Support />} />
         </Route>
-        <Route path="login" element={<Login />} />
-        <Route path="signup" element={<SignUp />} />
-        <Route path="/dashboard" element={<Dashboard />} />
-        {/* <Route path="/dashboard" element={<DashLayout />}>
-          <Route index element={<Dashboard />
-            //<ProtectedRoute><Dashboard /></ProtectedRoute>
+        <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<SignUp />} />
+        <Route path="/dashboard" element={<DashLayout />}>
+          <Route index element={
+            <ProtectedRoute>
+              <Dashboard />
+            </ProtectedRoute>
           }/>
-        </Route> */}
+        </Route>
         <Route
           path="admin"
           element={

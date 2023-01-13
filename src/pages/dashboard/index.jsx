@@ -5,7 +5,7 @@ export function Dashboard() {
   return (
     <>
       <h2>Dashboard (Protected)</h2>
-      <div>Authenticated as {user.token}</div>
+      {user && <div>Authenticated as {user.token}</div>}
     </>
   );
 };

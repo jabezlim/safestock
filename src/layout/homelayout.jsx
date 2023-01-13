@@ -2,20 +2,16 @@ import * as React from 'react';
 import { Outlet, Link as RouterLink } from "react-router-dom";
 import AppBar from '@mui/material/AppBar';
 import Button from '@mui/material/Button';
-import CssBaseline from '@mui/material/CssBaseline';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Link from '@mui/material/Link';
-import GlobalStyles from '@mui/material/GlobalStyles';
 import { useAuth } from '../components/auth';
 import { Footer } from './footer';
 
 export function HomeLayout() {
-  const { user, onLogin, onLogout } = useAuth();
+  const { user, onLogout } = useAuth();
   return (
-    <>
-      <GlobalStyles styles={{ ul: { margin: 0, padding: 0, listStyle: 'none' } }} />
-      <CssBaseline />
+    <>      
       <AppBar
         position="static"
         color="default"
