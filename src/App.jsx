@@ -15,7 +15,7 @@ import { HomeLayout } from './layout/homelayout';
 import { Enterprise, Feature, Support } from './pages/public/feature';
 import Login from './pages/account/login';
 import SignUp from './pages/account/signup';
-import { DashLayout } from './layout/dashlayout';
+import { Layout as DashLayout } from './layout/dashboard';
 
 function App() {
   return (
@@ -35,16 +35,14 @@ function App() {
             <ProtectedRoute>
               <Dashboard />
             </ProtectedRoute>
-          }/>
-        </Route>
-        <Route
-          path="admin"
-          element={
+          } />
+          <Route path="admin" element={
             <ProtectedRoute>
               <Admin />
             </ProtectedRoute>
-          }
-        />
+          } />
+        </Route>
+
         <Route path="*" element={<NoMatch />} />
       </Routes>
     </AuthProvider>

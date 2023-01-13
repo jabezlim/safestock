@@ -16,7 +16,7 @@ import { Copyright } from '../../components/copyright';
 import { Link as RouterLink } from "react-router-dom";
 import { useAuth } from '../../components/auth';
 import axios from 'axios';
-import { base_url } from '../../config/path';
+import { base_url } from '../../config/constant';
 
 const theme = createTheme();
 

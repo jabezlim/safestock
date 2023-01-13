@@ -14,7 +14,7 @@ import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { Copyright } from '../../components/copyright';
 import { useNavigate, Link as RouterLink } from "react-router-dom";
-import { base_url } from '../../config/path';
+import { base_url } from '../../config/constant';
 import axios from 'axios';
 
 const theme = createTheme();
