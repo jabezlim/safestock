@@ -19,7 +19,10 @@ export const setAuthData = (data) => {
   const storage = {
     user: {
       id: data.id,
-      name: data.firstName,
+      firstname: data.firstname,
+      lastname: data.lastname,
+      email: data.email,
+      optin: data.optin,
       level: data.level,
       token: data.token,
     },

@@ -16,6 +16,7 @@ import { Enterprise, Feature, Support } from './pages/public/feature';
 import Login from './pages/account/login';
 import SignUp from './pages/account/signup';
 import { Layout as DashLayout } from './layout/dashboard';
+import UserProfile from './pages/account/userprofile';
 
 function App() {
   return (
@@ -36,9 +37,9 @@ function App() {
               <Dashboard />
             </ProtectedRoute>
           } />
-          <Route path="admin" element={
+          <Route path="profile" element={
             <ProtectedRoute>
-              <Admin />
+              <UserProfile />
             </ProtectedRoute>
           } />
         </Route>
